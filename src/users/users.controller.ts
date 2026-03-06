@@ -1,7 +1,7 @@
 import { 
   Body, Controller, Delete, Get, 
   HttpCode, HttpStatus, Param, 
-  Patch, Post, Put 
+  Patch, Post
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -12,6 +12,11 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   
+  @Post()
+  create(@Body() dto: CreateUserDto): Promise<User> {
+    return this.usersService.create(dto);
+  }
+  
   @Get()
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
@@ -20,11 +25,6 @@ export class UsersController {
   @Get(':id')
   findOne(@Param('id') id: string): Promise<User> {
     return this.usersService.findOne(id);
-  }
-
-  @Post()
-  create(@Body() dto: CreateUserDto): Promise<User> {
-    return this.usersService.create(dto);
   }
   
   @Patch(':id') 
