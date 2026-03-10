@@ -4,19 +4,19 @@ import { Column, Entity } from "typeorm";
 
 @Entity('users')
 export class User extends BaseEntity {
-  @Column()
+  @Column({ length: 50 })
   firstName: string;
 
-  @Column()
+  @Column({ length: 50 })
   lastName: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, length: 50 })
   secondLastName?: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, length: 100 })
   email: string;
 
-  @Column()
+  @Column({ length: 255 })
   password: string;
 
   @Column({ nullable: true, length: 5 })
