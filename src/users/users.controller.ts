@@ -23,12 +23,12 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<User> {
+  findOne(@Param('id') id: string): Promise<User | null> {
     return this.usersService.findOne(id);
   }
   
   @Patch(':id') 
-  patch(@Param('id') id: string, @Body() dto: UpdateUserDto): Promise<User> {
+  patch(@Param('id') id: string, @Body() dto: UpdateUserDto): Promise<User | null> {
     return this.usersService.patch(id, dto);
   }
 

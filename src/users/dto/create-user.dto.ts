@@ -36,9 +36,8 @@ export class CreateUserDto {
   phoneCode?: string;
 
   @IsOptional()
-  @IsInt()
   @Matches(/^\d{4,15}$/, { message: 'phone must be 4-15 digits' })
-  phone?: number;
+  phone?: string;
 
   @IsOptional()
   @IsInt()
