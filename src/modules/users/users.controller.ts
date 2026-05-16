@@ -4,7 +4,9 @@ import {
   Patch, Post
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserProfileDto } from './dto/update-user-profile.dto';
+import { ChangeEmailDto } from './dto/change-email.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 
@@ -28,8 +30,18 @@ export class UsersController {
   }
   
   @Patch(':id') 
-  patch(@Param('id') id: string, @Body() dto: UpdateUserDto): Promise<User | null> {
-    return this.usersService.patch(id, dto);
+  updateProfile(@Param('id') id: string, @Body() dto: UpdateUserProfileDto): Promise<User | null> {
+    return this.usersService.updateProfile(id, dto);
+  }
+
+  @Patch(':id') 
+  changeEmail(@Param('id') id: string, @Body() dto: ChangeEmailDto): Promise<User | null> {
+    return this.usersService.changeEmail(id, dto);
+  }
+
+  @Patch(':id') 
+  changePassword(@Param('id') id: string, @Body() dto: ChangePasswordDto): Promise<User | null> {
+    return this.usersService.changePassword(id, dto);
   }
 
   @Delete(':id')
