@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './modules/auth/auth.module';
 import { HealthModule } from './modules/health/health.module';
 import { validationSchema } from './config/validation.schema';
 import configuration from './config/configuration';
@@ -30,6 +31,7 @@ import configuration from './config/configuration';
       }),
     }),
 
+    AuthModule,
     UsersModule,
     HealthModule,
   ],
