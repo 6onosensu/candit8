@@ -1,8 +1,14 @@
 import { 
-  IsEmail, IsInt, IsOptional, 
-  IsString, Matches, Max, 
-  MaxLength, Min, MinLength 
+  IsDateString,
+  IsEmail,
+  IsEnum,
+  IsOptional, 
+  IsString, 
+  Matches, 
+  MaxLength, 
+  MinLength 
 } from "class-validator";
+import { SignupRole } from 'src/common/enums/signup-role.enum';
 
 export class CreateUserDto {
   @IsString()
@@ -12,7 +18,7 @@ export class CreateUserDto {
 
   @IsString()
   @MinLength(2)
-  @MaxLength(100)
+  @MaxLength(50)
   lastName: string;
 
   @IsOptional()
@@ -26,22 +32,25 @@ export class CreateUserDto {
   email: string;
 
   @IsString()
-  @MinLength(6)
-  @MaxLength(255)
+  @MinLength(8)
+  @MaxLength(72)
   password: string;
 
-  @IsOptional()
   @IsString()
-  @Matches(/^\+\d{1,4}$/, { message: 'phoneCode must be start with + and have 1-3 digits' })
-  phoneCode?: string;
+  @Matches(/^\+\d{1,4}$/, { 
+    message: 'phoneCode must be start with + and have 1-4 digits' 
+  })
+  phoneCode: string;
 
-  @IsOptional()
-  @Matches(/^\d{4,15}$/, { message: 'phone must be 4-15 digits' })
-  phone?: string;
+  @IsString()
+  @Matches(/^\d{4,15}$/, { 
+    message: 'phone must be 4-15 digits' 
+  })
+  phone: string;
 
-  @IsOptional()
-  @IsInt()
-  @Min(14)
-  @Max(110)
-  age?: number;
+  @IsDateString()
+  birthDate: string;
+
+  @IsEnum(SignupRole)
+  role: SignupRole;
 }
